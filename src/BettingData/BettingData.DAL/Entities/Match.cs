@@ -6,6 +6,6 @@ namespace BettingData.DAL.Entities
     {
         public DateTime StartDate { get; set; }
         public MatchTypes MatchType { get; set; }
-        public List<Bet> Bets { get; set; }
+        public List<Market> Bets { get; set; }
     }
 }

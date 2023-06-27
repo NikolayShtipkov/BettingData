@@ -1,6 +1,7 @@
 ﻿namespace BettingData.DAL.Entities
 {
-    public class Bet : Entity
+    //Market in the xml file is known as Bet
+    public class Market : Entity
     {
         public bool IsLive { get; set; }
     }
