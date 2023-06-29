@@ -1,6 +1,10 @@
-﻿using System.Data.SqlTypes;
+﻿using BettingData.DAL.Entities;
+using System.Data.SqlTypes;
 using System.Net;
+using System.Text;
 using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace BettingData.BLL.Services
 {
@@ -22,12 +26,37 @@ namespace BettingData.BLL.Services
                 text = client.DownloadString(_URLString);
             }
 
+            File.WriteAllText("data.xml", text, Encoding.Unicode);
+
             return text;
         }
 
         public void ReadXml()
         {
-            string text = GetXmlString();
+            GetXmlString();
+
+            Console.WriteLine("Output using LINQ");
+            foreach (XElement xElement in XElement.Load(@"data.xml").Elements("Sport"))
+            {
+                Console.WriteLine(xElement.Attribute("ID").Value);
+                Console.WriteLine(xElement.Attribute("Name").Value);
+                Console.WriteLine();
+
+                var events = xElement.Elements("Event");
+                foreach (var item in events)
+                {
+                    Console.WriteLine(item.FirstAttribute.Value);
+                }
+            }
+        }
+
+        public void SportToObject(string name, string id)
+        {
+            Sport sport = new Sport() 
+            { 
+                Id = id,
+                Name = name
+            };
         }
     }
 }

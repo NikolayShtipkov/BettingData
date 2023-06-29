@@ -2,7 +2,7 @@
 {
     public class Entity
     {
-        protected string Id { get; set; }
-        protected string Name { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
     }
 }
